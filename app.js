@@ -3,6 +3,7 @@ const http = require('http')
 const bodyParser = require('body-parser')
 const connectDB = require('./src/config/connectDB')
 const app = express()
+const userRouter = require('./src/routers/userRouter')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -10,9 +11,8 @@ app.use(bodyParser.json())
 // connect DB
 connectDB()
 
-app.get("/", (req, res) => {
-    res.send('server is running')
-})
+// init userRouter
+userRouter(app)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
